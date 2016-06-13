@@ -12,6 +12,7 @@ using sas_Futura.Models;
 
 namespace sas_Futura.Controllers.API
 {
+    [Authorize]
     public class MotivosModelsApiController : ApiController
     {
         private MotivosModelContext db = new MotivosModelContext();
@@ -19,7 +20,7 @@ namespace sas_Futura.Controllers.API
         // GET: api/MotivosModelsApi
         public IQueryable<MotivosModel> GetMotivosModel()
         {
-            return db.MotivosModel.Where(m=> m.IdEmpresa== WebApiApplication.IdEmpresa);
+            return db.MotivosModel.Where(m => m.IdEmpresa == Startup.IdEmpresa);
         }
 
         // GET: api/MotivosModelsApi/5

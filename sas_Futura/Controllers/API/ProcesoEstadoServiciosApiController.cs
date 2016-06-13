@@ -12,6 +12,7 @@ using sas_Futura.Models;
 
 namespace sas_Futura.Controllers.API
 {
+    [Authorize]
     public class ProcesoEstadoServiciosApiController : ApiController
     {
         private sasProcesoEstadoServicioContext db = new sasProcesoEstadoServicioContext();
@@ -78,7 +79,7 @@ namespace sas_Futura.Controllers.API
             {
                 return BadRequest(ModelState);
             }
-            sasProcesoEstadoServicio.IdEmpresa = WebApiApplication.IdEmpresa;
+            sasProcesoEstadoServicio.IdEmpresa = Startup.IdEmpresa;
             db.sasProcesoEstadoServicio.Add(sasProcesoEstadoServicio);
             db.SaveChanges();
 

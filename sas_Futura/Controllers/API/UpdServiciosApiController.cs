@@ -8,6 +8,7 @@ using sas_Futura.Controllers.Services;
 
 namespace sas_Futura.Controllers.API
 {
+    [Authorize]
     public class UpdServiciosApiController : ApiController
     {
 

@@ -14,7 +14,7 @@ namespace sas_Futura.Models
         public DeviceUserContext()
             : base("FuturaConnection")
         {
-            Database.SetInitializer<ServiciosContext>(null);
+            Database.SetInitializer<DeviceUserContext>(null);
         }
 
         public virtual DbSet<DeviceUser> DeviceUser { get; set; }

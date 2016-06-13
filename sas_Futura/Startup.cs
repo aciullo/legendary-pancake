@@ -8,28 +8,22 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
-using System.Web.Optimization;
-using System.Web.Routing;
 
+[assembly: OwinStartup(typeof(sas_Futura.Startup))]
 namespace sas_Futura
 {
-    public class WebApiApplication : System.Web.HttpApplication
+
+    public class Startup
     {
         public static String IdEmpresa;
-        protected void Application_Start(IAppBuilder app)
+        public void Configuration(IAppBuilder app)
         {
-            AreaRegistration.RegisterAllAreas();
-            GlobalConfiguration.Configure(WebApiConfig.Register);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-            IdEmpresa = Convert.ToString(ConfigurationManager.AppSettings["IdEmpresa"]);
             ConfigureOAuth(app);
             HttpConfiguration config = new HttpConfiguration();
             WebApiConfig.Register(config);
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
+            IdEmpresa = Convert.ToString(ConfigurationManager.AppSettings["IdEmpresa"]);
         }
 
         public void ConfigureOAuth(IAppBuilder app)

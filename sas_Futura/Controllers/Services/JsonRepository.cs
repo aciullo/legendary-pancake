@@ -90,11 +90,11 @@ namespace sas_Futura.Controllers.Services
 
             if (codigo == null)
             {
-                sql = "SELECT codigo, nombre, idtabla from sas_datos where  idtabla = '" + idtabla + "' and idempresa= '" + WebApiApplication.IdEmpresa + "'  order by nombre ";
+                sql = "SELECT codigo, nombre, idtabla from sas_datos where  idtabla = '" + idtabla + "' and idempresa= '" + Startup.IdEmpresa + "'  order by nombre ";
             }
             else
             {
-                sql = "SELECT codigo, nombre, idtabla from sas_datos where idtabla = '" + idtabla + "' " + " and codigo='" + codigo + "' and idempresa= '" + WebApiApplication.IdEmpresa + "' order by nombre ";
+                sql = "SELECT codigo, nombre, idtabla from sas_datos where idtabla = '" + idtabla + "' " + " and codigo='" + codigo + "' and idempresa= '" + Startup.IdEmpresa + "' order by nombre ";
             }
 
 
@@ -162,7 +162,7 @@ namespace sas_Futura.Controllers.Services
                 command.CommandTimeout = 1200;
                 command = new SqlCommand("[Sas_Update_ServiceMobile]", conn);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add(new SqlParameter("@idempresa", WebApiApplication.IdEmpresa));
+                command.Parameters.Add(new SqlParameter("@idempresa", Startup.IdEmpresa));
                 command.Parameters.Add(new SqlParameter("@IdServicio", id_Solicitud));
                 command.Parameters.Add(new SqlParameter("@NroSolicitud", nro_solicitud));
                 command.Parameters.Add(new SqlParameter("@destino", destino));
@@ -228,7 +228,7 @@ namespace sas_Futura.Controllers.Services
                 " OtroServicio  ,IdProducto ,destino,iddesenlace, " +
                 " (select descripcion from st_Producto where idproducto= SAS_SERVICIOS.IdProducto and idempresa = SAS_SERVICIOS.idempresa) producto " + 
                 " from SAS_SERVICIOS " +
-                " where idestado <> '009' and (estado not in ('C','A','D') ) and idmovil = '" + codMovil + "' and idempresa= '" + WebApiApplication.IdEmpresa + "' order by estado desc ";
+                " where idestado <> '009' and (estado not in ('C','A','D') ) and idmovil = '" + codMovil + "' and idempresa= '" + Startup.IdEmpresa + "' order by estado desc ";
           
 
 

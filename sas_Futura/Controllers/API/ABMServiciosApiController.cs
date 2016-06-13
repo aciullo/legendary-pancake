@@ -12,6 +12,7 @@ using sas_Futura.Models;
 using sas_Futura.Controllers.Services;
 namespace sas_Futura.Controllers.API
 {
+    [Authorize]
     public class ABMServiciosApiController : ApiController
     {
         private JsonRepository jsonRepository;

@@ -17,23 +17,23 @@ namespace sas_Futura.Controllers.API
         private DeviceUserContext db = new DeviceUserContext();
 
         // GET: api/DeviceUsersApi
-        public IQueryable<DeviceUser> GetDeviceUser()
-        {
-            return db.DeviceUser;
-        }
+        //public IQueryable<DeviceUser> GetDeviceUser()
+        //{
+        //    return db.DeviceUser;
+        //}
 
-        // GET: api/DeviceUsersApi/5
-        [ResponseType(typeof(DeviceUser))]
-        public IHttpActionResult GetDeviceUser(string id)
-        {
-            DeviceUser deviceUser = db.DeviceUser.Find(id);
-            if (deviceUser == null)
-            {
-                return NotFound();
-            }
+        //// GET: api/DeviceUsersApi/5
+        //[ResponseType(typeof(DeviceUser))]
+        //public IHttpActionResult GetDeviceUser(string id)
+        //{
+        //    DeviceUser deviceUser = db.DeviceUser.Find(id);
+        //    if (deviceUser == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(deviceUser);
-        }
+        //    return Ok(deviceUser);
+        //}
        
         [ResponseType(typeof(DeviceUser))]
         public IHttpActionResult GetDeviceUser(string id, string idestado)
@@ -46,86 +46,86 @@ namespace sas_Futura.Controllers.API
 
             return Ok(deviceUser);
         }
-        // PUT: api/DeviceUsersApi/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutDeviceUser(string id, DeviceUser deviceUser)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// PUT: api/DeviceUsersApi/5
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutDeviceUser(string id, DeviceUser deviceUser)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != deviceUser.usuario)
-            {
-                return BadRequest();
-            }
+        //    if (id != deviceUser.usuario)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            db.Entry(deviceUser).State = EntityState.Modified;
+        //    db.Entry(deviceUser).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DeviceUserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!DeviceUserExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
-        // POST: api/DeviceUsersApi
-        [ResponseType(typeof(DeviceUser))]
-        public IHttpActionResult PostDeviceUser(DeviceUser deviceUser)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// POST: api/DeviceUsersApi
+        //[ResponseType(typeof(DeviceUser))]
+        //public IHttpActionResult PostDeviceUser(DeviceUser deviceUser)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            db.DeviceUser.Add(deviceUser);
+        //    db.DeviceUser.Add(deviceUser);
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (DeviceUserExists(deviceUser.usuario))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateException)
+        //    {
+        //        if (DeviceUserExists(deviceUser.usuario))
+        //        {
+        //            return Conflict();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return CreatedAtRoute("DefaultApi", new { id = deviceUser.usuario }, deviceUser);
-        }
+        //    return CreatedAtRoute("DefaultApi", new { id = deviceUser.usuario }, deviceUser);
+        //}
 
-        // DELETE: api/DeviceUsersApi/5
-        [ResponseType(typeof(DeviceUser))]
-        public IHttpActionResult DeleteDeviceUser(string id)
-        {
-            DeviceUser deviceUser = db.DeviceUser.Find(id);
-            if (deviceUser == null)
-            {
-                return NotFound();
-            }
+        //// DELETE: api/DeviceUsersApi/5
+        //[ResponseType(typeof(DeviceUser))]
+        //public IHttpActionResult DeleteDeviceUser(string id)
+        //{
+        //    DeviceUser deviceUser = db.DeviceUser.Find(id);
+        //    if (deviceUser == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            db.DeviceUser.Remove(deviceUser);
-            db.SaveChanges();
+        //    db.DeviceUser.Remove(deviceUser);
+        //    db.SaveChanges();
 
-            return Ok(deviceUser);
-        }
+        //    return Ok(deviceUser);
+        //}
 
         protected override void Dispose(bool disposing)
         {

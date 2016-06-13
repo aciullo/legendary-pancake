@@ -13,12 +13,14 @@ using sas_Futura.Controllers.Services;
 
 namespace sas_Futura.Controllers
 {
+     [Authorize]
     public class sas_ServiciosApiController : ApiController
     {
         //private sas_Servicios db = new sas_Servicios();
         private ServiciosContext db = new ServiciosContext();
         private JsonRepository jsonRepository;
 
+       
         public sas_ServiciosApiController()
         {
             this.jsonRepository = new JsonRepository();
@@ -27,7 +29,7 @@ namespace sas_Futura.Controllers
         // GET: api/sas_ServiciosApi
         public IQueryable<ServiciosModel> Getsas_Servicios()
         {
-            return db.sas_servicios.Where(m => m.idEmpresa == WebApiApplication.IdEmpresa);
+            return db.sas_servicios.Where(m => m.idEmpresa == Startup.IdEmpresa);
 
         }
 
@@ -48,7 +50,7 @@ namespace sas_Futura.Controllers
         public IHttpActionResult Getsas_Servicios(string id, string idestado, string estado)
         {
 
-            var servicios = db.sas_servicios.Where(s => s.codMovil == id && s.codEstado == idestado && s.Estado == estado && s.idEmpresa == WebApiApplication.IdEmpresa).ToList();
+            var servicios = db.sas_servicios.Where(s => s.codMovil == id && s.codEstado == idestado && s.Estado == estado && s.idEmpresa == Startup.IdEmpresa).ToList();
             if (servicios == null || servicios.Count==0 )
             {
                 return NotFound();

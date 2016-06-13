@@ -10,6 +10,7 @@ using System.Web.Http.Description;
 using Newtonsoft.Json;
 namespace sas_Futura.Controllers.API
 {
+    [Authorize]
     public class SasDatosApiController : ApiController
     {
          private JsonRepository jsonRepository;
