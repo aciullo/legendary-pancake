@@ -9,13 +9,14 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using sas_Futura.Models;
+using sas_Futura.Class;
 
 namespace sas_Futura.Controllers.API
 {
     public class DeviceUsersApiController : ApiController
     {
         private DeviceUserContext db = new DeviceUserContext();
-
+        private clsAutenticacion encrip = new clsAutenticacion();
         // GET: api/DeviceUsersApi
         //public IQueryable<DeviceUser> GetDeviceUser()
         //{
@@ -82,34 +83,36 @@ namespace sas_Futura.Controllers.API
         //}
 
         //// POST: api/DeviceUsersApi
-        //[ResponseType(typeof(DeviceUser))]
-        //public IHttpActionResult PostDeviceUser(DeviceUser deviceUser)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        [ResponseType(typeof(DeviceUser))]
+        public IHttpActionResult PostDeviceUser(DeviceUser deviceUser)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    db.DeviceUser.Add(deviceUser);
+            deviceUser.pass = encrip.Encripta(deviceUser.pass);
+            db.DeviceUser.Add(deviceUser);
+             
+                 
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (DeviceUserExists(deviceUser.usuario))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        if (DeviceUserExists(deviceUser.usuario))
-        //        {
-        //            return Conflict();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return CreatedAtRoute("DefaultApi", new { id = deviceUser.usuario }, deviceUser);
-        //}
+            return CreatedAtRoute("DefaultApi", new { id = deviceUser.usuario }, deviceUser);
+        }
 
         //// DELETE: api/DeviceUsersApi/5
         //[ResponseType(typeof(DeviceUser))]
