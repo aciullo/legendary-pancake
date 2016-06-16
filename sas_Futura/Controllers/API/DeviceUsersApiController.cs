@@ -10,7 +10,10 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using sas_Futura.Models;
 using sas_Futura.Class;
-
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 namespace sas_Futura.Controllers.API
 {
     public class DeviceUsersApiController : ApiController
@@ -46,6 +49,61 @@ namespace sas_Futura.Controllers.API
             }
 
             return Ok(deviceUser);
+        }
+
+        [ResponseType(typeof(string))]
+        public IHttpActionResult GetDeviceUser(string id)
+        {
+            var deviceUser = db.DeviceUser.Where(u => u.codMovil==id).ToList();
+            if (deviceUser == null || deviceUser.Count == 0)
+            {
+                return NotFound();
+            }
+
+             string MESSAGE = "Nuevo Servicio ";
+             string resultado="";
+
+            foreach (var user in deviceUser)
+            {
+                var jGcmData = new JObject();
+                var jData = new JObject();
+
+                jData.Add("message", MESSAGE);
+               // jGcmData.Add("to", "/topics/global");
+               jGcmData.Add("to", user.idRegistro);
+                //jGcmData.Add("to", user.idRegistro + "/topics/global");
+
+                jGcmData.Add("data", jData);
+
+                var url = new Uri("https://gcm-http.googleapis.com/gcm/send");
+                try
+                {
+                    using (var client = new HttpClient())
+                    {
+                        client.DefaultRequestHeaders.Accept.Add(
+                            new MediaTypeWithQualityHeaderValue("application/json"));
+
+                        client.DefaultRequestHeaders.TryAddWithoutValidation(
+                            "Authorization", "key=" + Startup.API_KEY);
+
+                        Task.WaitAll(client.PostAsync(url,
+                            new StringContent(jGcmData.ToString(), Encoding.Default, "application/json"))
+                                .ContinueWith(response =>
+                                {
+                                    resultado= response.Status.ToString();
+                                    resultado= resultado + " " +  response.Result.ToString();
+                                    resultado = resultado + " " + "Message sent: check the client device notification tray.";
+                                }));
+                    }
+                }
+                catch (Exception e)
+                {
+                    resultado = ("Unable to send GCM message:");
+                    resultado = resultado + " STRACKTRACE:  " + (e.StackTrace);
+                }
+            }
+
+            return Ok(resultado);
         }
         //// PUT: api/DeviceUsersApi/5
         //[ResponseType(typeof(void))]

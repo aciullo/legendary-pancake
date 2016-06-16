@@ -63,11 +63,21 @@ namespace sas_Futura.Controllers.API
                 return BadRequest();
             }
 
-            db.Entry(deviceUser).State = EntityState.Modified;
-
+          //  db.Entry(deviceUser).State = EntityState.Modified;
+            
+            
             try
             {
-                db.SaveChanges();
+               // db.SaveChanges();
+
+                var usuario = db.DeviceUser.Where(u => u.usuario == id && u.codMovil.Contains(deviceUser.codMovil)).SingleOrDefault();
+                if (usuario!=null)
+                {
+                    usuario.idRegistro = deviceUser.idRegistro;
+                    db.Entry(usuario).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
             }
             catch (DbUpdateConcurrencyException)
             {

@@ -16,6 +16,7 @@ namespace sas_Futura
     public class Startup
     {
         public static String IdEmpresa;
+        public static string API_KEY;
         public void Configuration(IAppBuilder app)
         {
             ConfigureOAuth(app);
@@ -24,6 +25,7 @@ namespace sas_Futura
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
             IdEmpresa = Convert.ToString(ConfigurationManager.AppSettings["IdEmpresa"]);
+            API_KEY = Convert.ToString(ConfigurationManager.AppSettings["Api_key"]);
         }
 
         public void ConfigureOAuth(IAppBuilder app)

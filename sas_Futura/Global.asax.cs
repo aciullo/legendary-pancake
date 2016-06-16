@@ -16,7 +16,8 @@ namespace sas_Futura
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
-        public static String IdEmpresa;
+       
+      
         protected void Application_Start(IAppBuilder app)
         {
             AreaRegistration.RegisterAllAreas();
@@ -24,28 +25,10 @@ namespace sas_Futura
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            IdEmpresa = Convert.ToString(ConfigurationManager.AppSettings["IdEmpresa"]);
-            ConfigureOAuth(app);
-            HttpConfiguration config = new HttpConfiguration();
-            WebApiConfig.Register(config);
-            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
-            app.UseWebApi(config);
+   
+          
+           
         }
 
-        public void ConfigureOAuth(IAppBuilder app)
-        {
-            OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
-            {
-                AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString("/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                Provider = new SimpleAuthorizationServerProvider()
-            };
-
-            // Token Generation
-            app.UseOAuthAuthorizationServer(OAuthServerOptions);
-            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
-
-        }
-    }
+      }
 }
