@@ -34,19 +34,25 @@ namespace sas_Futura.Models
      [Table("DeviceUser")]
     public class DeviceUser
     {
-
+        [Display(Name = "Nombres")]
+        public string nombres { get; set; }
+        [Display(Name = "Apellidos")]
+        public string apellidos { get; set; }
            [Key]
         [Column("UserName")]
+         [Display(Name="Usuario")]
         public string usuario { get; set; }
           [Column("password")]
+          [Display(Name = "Clave")]
+         [DataType(DataType.Password)]
         public string pass { get; set; }
 
         [Column("idMovil")]
+        [Display(Name = "Código de Movil")]
         public string codMovil { get; set; }
-
-        public string nombres { get; set; }
-        public string apellidos { get; set; }
-
+        
+        
+   
         public string idRegistro { get; set; }
 
     }

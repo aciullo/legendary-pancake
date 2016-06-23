@@ -12,7 +12,7 @@ using sas_Futura.Models;
 
 namespace sas_Futura.Controllers.API
 {
-    [Authorize]
+   [Authorize]
     public class UsersApiController : ApiController
     {
         private DeviceUserContext db = new DeviceUserContext();

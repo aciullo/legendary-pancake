@@ -212,11 +212,8 @@
     <Compile Include="Controllers\API\ServiciosApiController.cs" />
     <Compile Include="Controllers\Services\DataAccess.cs" />
     <Compile Include="Controllers\Services\JsonRepository.cs" />
+    <Compile Include="Controllers\UI\DeviceUsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Models\ABMServicios.cs" />
     <Compile Include="Models\DeviceUser.cs" />
     <Compile Include="Models\MotivosModel.cs" />
@@ -233,7 +230,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -280,6 +276,11 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\DeviceUsers\Create.cshtml" />
+    <Content Include="Views\DeviceUsers\Delete.cshtml" />
+    <Content Include="Views\DeviceUsers\Details.cshtml" />
+    <Content Include="Views\DeviceUsers\Edit.cshtml" />
+    <Content Include="Views\DeviceUsers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
