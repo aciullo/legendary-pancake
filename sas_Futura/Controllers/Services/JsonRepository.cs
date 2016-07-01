@@ -206,7 +206,8 @@ namespace sas_Futura.Controllers.Services
             connectionString = acc.leerConeccion();
             string sql = "";
 
-
+               try
+            {
 
             conn = new SqlConnection(connectionString);
 
@@ -287,12 +288,24 @@ namespace sas_Futura.Controllers.Services
             }
 
 
-            conn.Close();
-            return searchResults;
-
           
+            
 
+            }
+               catch (Exception ex)
+               {
+                    searchResults.Add(new ServiciosModel()
+                    {
+                        
+                        nombreSolicitante =ex.Message.ToString()
+                    });
+               }
+               finally
+               {
+                   conn.Close();
+               }
 
+            return searchResults;
         }
     }
 }

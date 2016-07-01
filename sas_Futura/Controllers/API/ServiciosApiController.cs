@@ -71,40 +71,59 @@ namespace sas_Futura.Controllers
              return NotFound();
          }
 
-    //    // PUT: api/sas_ServiciosApi/5
-    //    [ResponseType(typeof(void))]
-    //    public IHttpActionResult Putsas_Servicios(int id, sas_Servicios sas_Servicios)
-    //    {
-    //        if (!ModelState.IsValid)
-    //        {
-    //            return BadRequest(ModelState);
-    //        }
+         // PUT: api/sas_ServiciosApi/5
+         [ResponseType(typeof(void))]
+         public IHttpActionResult Putsas_Servicios(int id, ServiciosModel sas_Servicios)
+         {
+             if (!ModelState.IsValid)
+             {
+                 return BadRequest(ModelState);
+             }
 
-    //        if (id != sas_Servicios.idSolicitud)
-    //        {
-    //            return BadRequest();
-    //        }
+             if (id != sas_Servicios.id_Solicitud)
+             {
+                 return BadRequest();
+             }
 
-    //        db.Entry(sas_Servicios).State = EntityState.Modified;
+             //db.Entry(sas_Servicios).State = EntityState.Modified;
 
-    //        try
-    //        {
-    //            db.SaveChanges();
-    //        }
-    //        catch (DbUpdateConcurrencyException)
-    //        {
-    //            if (!sas_ServiciosExists(id))
-    //            {
-    //                return NotFound();
-    //            }
-    //            else
-    //            {
-    //                throw;
-    //            }
-    //        }
+             try
+             
+             {
+                 var ser = db.sas_servicios.Where(s => s.id_Solicitud == id).SingleOrDefault();
+                 if (ser != null)
+                 {
+                    
+                     ser.SAT = sas_Servicios.SAT;
+                     ser.sv_fc= sas_Servicios.sv_fc;
+                     ser.sv_fresp = sas_Servicios.sv_fresp;
+                     ser.sv_ta = sas_Servicios.sv_ta;
+                     ser.sv_tempe = sas_Servicios.sv_tempe;
+                     ser.Glasgow = sas_Servicios.Glasgow;
+                     ser.Glicemia = sas_Servicios.Glicemia;
+                     ser.codInstitucion = sas_Servicios.codInstitucion;
+                     ser.codMedico = sas_Servicios.codMedico;
+                     
 
-    //        return StatusCode(HttpStatusCode.NoContent);
-    //    }
+                     db.Entry(ser).State = EntityState.Modified;
+                     db.SaveChanges();
+                 }
+                 
+             }
+             catch (DbUpdateConcurrencyException)
+             {
+                 if (!sas_ServiciosExists(id))
+                 {
+                     return NotFound();
+                 }
+                 else
+                 {
+                     throw;
+                 }
+             }
+
+             return StatusCode(HttpStatusCode.NoContent);
+         }
 
     //    // POST: api/sas_ServiciosApi
     //    [ResponseType(typeof(sas_Servicios))]
@@ -152,18 +171,18 @@ namespace sas_Futura.Controllers
     //        return Ok(sas_Servicios);
     //    }
 
-    //    protected override void Dispose(bool disposing)
-    //    {
-    //        if (disposing)
-    //        {
-    //            db.Dispose();
-    //        }
-    //        base.Dispose(disposing);
-    //    }
+         protected override void Dispose(bool disposing)
+         {
+             if (disposing)
+             {
+                 db.Dispose();
+             }
+             base.Dispose(disposing);
+         }
 
-    //    private bool sas_ServiciosExists(int id)
-    //    {
-    //        return db.sas_Servicios.Count(e => e.idSolicitud == id) > 0;
-    //    }
+         private bool sas_ServiciosExists(int id)
+         {
+             return db.sas_servicios.Count(e => e.id_Solicitud == id) > 0;
+         }
     }
 }
