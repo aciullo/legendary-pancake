@@ -12,7 +12,6 @@ using sas_Futura.Models;
 
 namespace sas_Futura.Controllers.API
 {
-    [Authorize]
     public class ProcesoEstadoServiciosApiController : ApiController
     {
         private sasProcesoEstadoServicioContext db = new sasProcesoEstadoServicioContext();
@@ -79,6 +78,7 @@ namespace sas_Futura.Controllers.API
             {
                 return BadRequest(ModelState);
             }
+
             sasProcesoEstadoServicio.IdEmpresa = Startup.IdEmpresa;
             db.sasProcesoEstadoServicio.Add(sasProcesoEstadoServicio);
             db.SaveChanges();
@@ -89,23 +89,6 @@ namespace sas_Futura.Controllers.API
         // DELETE: api/ProcesoEstadoServiciosApi/5
         [ResponseType(typeof(sasProcesoEstadoServicio))]
         public IHttpActionResult DeletesasProcesoEstadoServicio(int id)
-        {
-            sasProcesoEstadoServicio sasProcesoEstadoServicio = db.sasProcesoEstadoServicio.Find(id);
-            if (sasProcesoEstadoServicio == null)
-            {
-                return NotFound();
-            }
-
-            db.sasProcesoEstadoServicio.Remove(sasProcesoEstadoServicio);
-            db.SaveChanges();
-
-            return Ok(sasProcesoEstadoServicio);
-        }
-
-
-        // DELETE: api/ProcesoEstadoServiciosApi/5
-        [ResponseType(typeof(sasProcesoEstadoServicio))]
-        public IHttpActionResult DeletesasProcesoEstadoServicio(int id, int numeroSolicitud)
         {
             sasProcesoEstadoServicio sasProcesoEstadoServicio = db.sasProcesoEstadoServicio.Find(id);
             if (sasProcesoEstadoServicio == null)

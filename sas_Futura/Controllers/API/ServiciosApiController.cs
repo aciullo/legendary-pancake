@@ -101,9 +101,7 @@ namespace sas_Futura.Controllers
                      ser.sv_tempe = sas_Servicios.sv_tempe;
                      ser.Glasgow = sas_Servicios.Glasgow;
                      ser.Glicemia = sas_Servicios.Glicemia;
-                     ser.codInstitucion = sas_Servicios.codInstitucion;
-                     ser.codMedico = sas_Servicios.codMedico;
-                     
+                     ser.IndicacionArribo = sas_Servicios.IndicacionArribo;
 
                      db.Entry(ser).State = EntityState.Modified;
                      db.SaveChanges();

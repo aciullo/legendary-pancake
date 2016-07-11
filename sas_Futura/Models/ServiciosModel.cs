@@ -129,6 +129,8 @@ namespace sas_Futura.Models
             public string SAT { get; set; }
             public string Glasgow { get; set; }
             public string Glicemia { get; set; }
+
+            public string IndicacionArribo { get; set; }
             [NotMapped]
             public string producto { get; set; }
 

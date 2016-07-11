@@ -53,7 +53,14 @@ namespace sas_Futura.Models
         public string Address { get; set; }
 
         public string IdEmpresa { get;set;}
-            
 
+        public string sv_ta { get; set; }
+        public string sv_fc { get; set; }
+        public string sv_tempe { get; set; }
+        public string sv_fresp { get; set; }
+        public string SAT { get; set; }
+        public string Glasgow { get; set; }
+        public string Glicemia { get; set; }
+        public string IndicacionArribo { get; set; }
     }
 }
