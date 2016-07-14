@@ -68,6 +68,7 @@ namespace sas_Futura.Controllers.UI
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             DeviceUser deviceUser = db.DeviceUser.Find(id);
+            deviceUser.pass = encrip.Desencripta(deviceUser.pass);
             if (deviceUser == null)
             {
                 return HttpNotFound();

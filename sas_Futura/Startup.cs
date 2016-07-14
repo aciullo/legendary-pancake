@@ -19,6 +19,7 @@ namespace sas_Futura
     {
         public static String IdEmpresa;
         public static string API_KEY;
+        public static string FuturaConn;
         public void Configuration(IAppBuilder app)
         {
             AreaRegistration.RegisterAllAreas();
@@ -34,6 +35,8 @@ namespace sas_Futura
             app.UseWebApi(config);
             IdEmpresa = Convert.ToString(ConfigurationManager.AppSettings["IdEmpresa"]);
             API_KEY = Convert.ToString(ConfigurationManager.AppSettings["Api_key"]);
+            FuturaConn= Convert.ToString(ConfigurationManager.ConnectionStrings["FuturaConnection"]);
+
         }
 
         public void ConfigureOAuth(IAppBuilder app)

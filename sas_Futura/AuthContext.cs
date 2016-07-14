@@ -13,8 +13,21 @@ namespace sas_Futura
         public AuthContext()
             : base("FuturaConnection")
         {
-            Database.SetInitializer<ServiciosContext>(null);
+          //  Database.SetInitializer<AuthContext>(null);
         }
         public virtual DbSet<DeviceUser> DeviceUser { get; set; }
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    //Configure default schema
+        //    modelBuilder.HasDefaultSchema("dbo");
+
+        //    //Map entity to table
+        //    modelBuilder.Entity<DeviceUser>().ToTable("DeviceUser");
+
+
+        //}
+    
     }
+
 }
