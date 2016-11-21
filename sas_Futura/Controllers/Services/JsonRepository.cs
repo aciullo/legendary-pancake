@@ -229,7 +229,7 @@ namespace sas_Futura.Controllers.Services
                 " OtroServicio  ,IdProducto ,destino,iddesenlace, " +
                 " (select descripcion from st_Producto where idproducto= SAS_SERVICIOS.IdProducto and idempresa = SAS_SERVICIOS.idempresa) producto " + 
                 " from SAS_SERVICIOS " +
-                " where idestado <> '009' and (estado not in ('C','A','D') ) and idmovil = '" + codMovil + "' and idempresa= '" + Startup.IdEmpresa + "' order by estado desc ";
+                " where idestado <> '009' and (estado not in ('C','A') ) and idmovil = '" + codMovil + "' and idempresa= '" + Startup.IdEmpresa + "' order by estado desc ";
           
 
 

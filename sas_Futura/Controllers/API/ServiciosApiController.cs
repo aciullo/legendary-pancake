@@ -90,7 +90,7 @@ namespace sas_Futura.Controllers
              try
              
              {
-                 var ser = db.sas_servicios.Where(s => s.id_Solicitud == id).SingleOrDefault();
+                 var ser = db.sas_servicios.Where(s => s.id_Solicitud == id & s.idEmpresa == Startup.IdEmpresa).SingleOrDefault();
                  if (ser != null)
                  {
                     
